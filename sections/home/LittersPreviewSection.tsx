@@ -10,6 +10,7 @@ const litters = [
     date: "Nasc. jan. 2025",
     badge: "Disponível",
     badgeClass: "bg-green-100 text-green-700",
+    image: "/images/home1.png",
   },
   {
     title: "Ninhada Outono",
@@ -17,6 +18,7 @@ const litters = [
     date: "Nasc. nov. 2024",
     badge: "2 restantes",
     badgeClass: "bg-amber-100 text-amber-700",
+    image: "/images/home2.png",
   },
   {
     title: "Ninhada Primavera II",
@@ -24,12 +26,13 @@ const litters = [
     date: "Prev. mar. 2025",
     badge: "Em breve",
     badgeClass: "bg-blue-100 text-blue-700",
+    image: "/images/home3.png",
   },
-];
+] as const;
 
 export function LittersPreviewSection() {
   return (
-    <section className="bg-cream py-20 sm:py-28">
+    <section className="bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="reveal text-center">
           <ScrollReveal>
@@ -53,13 +56,13 @@ export function LittersPreviewSection() {
                 href={routes.litters}
                 className="card-hover block cursor-pointer overflow-hidden rounded-3xl border border-beige-dark/15 bg-white"
               >
-                <div className="img-placeholder relative flex aspect-[4/3] items-center justify-center">
+                <div className="relative aspect-[4/3] overflow-hidden bg-beige/40">
                   <Image
-                    src="/images/dog-silhouette.svg"
-                    alt=""
-                    width={96}
-                    height={96}
-                    className="opacity-20"
+                    src={l.image}
+                    alt={l.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-6">

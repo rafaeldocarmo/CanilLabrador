@@ -45,7 +45,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "site-header fixed top-0 left-0 right-0 z-50 bg-transparent",
+        "site-header fixed top-0 left-0 right-0 z-50 bg-white",
         scrolled && "scrolled",
       )}
     >

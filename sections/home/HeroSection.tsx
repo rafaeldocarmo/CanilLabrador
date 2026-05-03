@@ -58,44 +58,49 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[15rem] shrink-0 sm:max-w-[14.5rem] lg:max-w-[18rem]">
-            <div className="absolute inset-0 scale-105 rotate-3 rounded-[1.35rem] bg-brown/10 sm:rounded-[1.65rem] xl:rounded-[2rem]" />
-            <div className="img-placeholder relative flex aspect-[2/3] items-end justify-center overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] xl:rounded-[2rem]">
-              <Image
-                src="/images/hero-labrador.png"
-                alt=""
-                width={640}
-                height={960}
-                sizes="(max-width: 480px) 72vw, (max-width: 1024px) 42vw, 288px"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="anim-fade-up-d3 absolute -left-2 top-6 flex max-w-[11rem] items-center gap-2 rounded-xl bg-white p-2 shadow-md sm:-left-3 sm:top-8 md:-left-8 lg:-left-12 xl:-left-[150px] sm:max-w-none sm:gap-2.5 sm:rounded-2xl sm:p-2.5 sm:shadow-lg">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100 sm:h-9 sm:w-9">
-                <ShieldCheck className="h-4 w-4 text-green-600 sm:h-5 sm:w-5" aria-hidden />
-              </div>
-              <div className="min-w-0 text-left">
-                <p className="text-[10px] font-bold leading-tight text-black sm:text-xs">
-                  Exames de saúde
-                </p>
-                <p className="text-[10px] leading-tight text-black/50 sm:text-xs">
-                  Todos os pais certificados
-                </p>
+          <div className="relative mx-auto w-full min-w-0 max-w-[26rem] shrink-0 sm:max-w-lg lg:max-w-[28rem]">
+            <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-[20rem] lg:max-w-none">
+              <div className="absolute inset-0 scale-105 rotate-3 rounded-[1.35rem] bg-brown/10 sm:rounded-[1.65rem] xl:rounded-[2rem]" />
+              <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.25rem] bg-beige/40 sm:rounded-[1.5rem] xl:rounded-[2rem]">
+                <Image
+                  src="/images/hero-novo.png"
+                  alt=""
+                  width={1024}
+                  height={1024}
+                  sizes="(max-width: 480px) 90vw, (max-width: 1024px) 50vw, 448px"
+                  className="h-full w-full object-cover"
+                  priority
+                />
               </div>
             </div>
 
-            <div className="anim-fade-up-d4 absolute -right-2 bottom-12 flex max-w-[11rem] items-center gap-2 rounded-xl bg-white p-2 shadow-md sm:-right-3 sm:bottom-14 md:-right-8 lg:-right-12 xl:-right-[150px] sm:max-w-none sm:gap-2.5 sm:rounded-2xl sm:p-2.5 sm:shadow-lg lg:bottom-12">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 sm:h-9 sm:w-9">
-                <Heart className="h-4 w-4 text-amber-600 sm:h-5 sm:w-5" aria-hidden />
+            <div className="relative z-10 mx-auto mt-7 flex w-full max-w-[20rem] flex-row items-stretch justify-center gap-2 sm:mt-5 sm:max-w-none sm:gap-3 lg:contents lg:mt-0">
+              <div className="anim-fade-up-d3 flex min-w-0 flex-1 items-center gap-1.5 rounded-xl bg-white p-2 shadow-md sm:gap-2 sm:rounded-2xl sm:p-2.5 sm:shadow-lg lg:absolute lg:mt-0 lg:min-w-0 lg:w-auto lg:flex-none lg:max-w-none lg:-left-12 lg:top-8 xl:-left-[100px]">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100 sm:h-9 sm:w-9">
+                  <ShieldCheck className="h-4 w-4 text-green-600 sm:h-5 sm:w-5" aria-hidden />
+                </div>
+                <div className="min-w-0 text-left lg:max-w-none">
+                  <p className="text-[10px] font-bold leading-tight text-black sm:text-xs">
+                    Exames de saúde
+                  </p>
+                  <p className="text-[10px] leading-tight text-black/50 sm:text-xs">
+                    Todos os pais certificados
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0 text-left">
-                <p className="text-[10px] font-bold leading-tight text-black sm:text-xs">
-                  200+ famílias
-                </p>
-                <p className="text-[10px] leading-tight text-black/50 sm:text-xs">
-                  Lares felizes para sempre
-                </p>
+
+              <div className="anim-fade-up-d4 flex min-w-0 flex-1 items-center gap-1.5 rounded-xl bg-white p-2 shadow-md sm:gap-2 sm:rounded-2xl sm:p-2.5 sm:shadow-lg lg:absolute lg:mt-0 lg:min-w-0 lg:w-auto lg:flex-none lg:max-w-none lg:-right-12 lg:bottom-12 xl:-right-[100px]">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 sm:h-9 sm:w-9">
+                  <Heart className="h-4 w-4 text-amber-600 sm:h-5 sm:w-5" aria-hidden />
+                </div>
+                <div className="min-w-0 text-left lg:max-w-none">
+                  <p className="text-[10px] font-bold leading-tight text-black sm:text-xs">
+                    200+ famílias
+                  </p>
+                  <p className="text-[10px] leading-tight text-black/50 sm:text-xs">
+                    Lares felizes para sempre
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -103,11 +108,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" className="w-full" aria-hidden>
+      <div className="absolute bottom-0 left-0 right-0 leading-[0]">
+        <svg
+          viewBox="0 0 1440 60"
+          fill="none"
+          className="block w-full translate-y-px text-cream"
+          aria-hidden
+        >
           <path
             d="M0 30 Q360 0 720 30 Q1080 60 1440 30 L1440 60 L0 60 Z"
-            fill="#FFFDF8"
+            className="fill-current"
           />
         </svg>
       </div>
