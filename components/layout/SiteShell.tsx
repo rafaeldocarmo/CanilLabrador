@@ -4,9 +4,9 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-full flex-col bg-beige-light">
+    <div className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-beige-light">
       <SiteHeader />
-      <main className="flex-1 pt-16 sm:pt-20">{children}</main>
+      <main className="min-w-0 flex-1 pt-16 sm:pt-20">{children}</main>
       <SiteFooter />
     </div>
   );

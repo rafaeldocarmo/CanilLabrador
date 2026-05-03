@@ -98,7 +98,14 @@ export function SiteHeader() {
 
         <nav
           id="mobile-menu"
-          className={cn("mobile-menu md:hidden pb-4", mobileOpen && "open")}
+          className={cn(
+            "md:hidden overflow-hidden transition-[max-height] duration-300 ease-out",
+            mobileOpen
+              ? "max-h-[min(75vh,560px)] pb-4 pt-2"
+              : "pointer-events-none max-h-0 pb-0 pt-0",
+          )}
+          aria-hidden={!mobileOpen}
+          inert={!mobileOpen ? true : undefined}
           aria-label="Navegação no celular"
         >
           <div className="flex flex-col gap-1 rounded-2xl border border-beige-dark/30 bg-cream p-4 shadow-lg">
