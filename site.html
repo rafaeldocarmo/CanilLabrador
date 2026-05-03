@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canil Massister - Labrador Retrievers</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        beige: '#F3E8D4',
+        'beige-light': '#FAF5ED',
+        'beige-dark': '#E8D5B8',
+        brown: '#895129',
+        'brown-light': '#A0683E',
+        'brown-dark': '#6E3F1F',
+        cream: '#FFFDF8',
+      },
+      fontFamily: {
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        body: ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+  <style>
+html { scroll-behavior: smooth; height: 100%; }
+body { height: 100%; margin: 0; font-family: 'DM Sans', sans-serif; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pawPrint {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+.anim-fade-up { animation: fadeInUp 0.7s ease-out both; }
+.anim-fade-up-d1 { animation: fadeInUp 0.7s 0.1s ease-out both; }
+.anim-fade-up-d2 { animation: fadeInUp 0.7s 0.2s ease-out both; }
+.anim-fade-up-d3 { animation: fadeInUp 0.7s 0.3s ease-out both; }
+.anim-fade-up-d4 { animation: fadeInUp 0.7s 0.4s ease-out both; }
+.anim-fade-in { animation: fadeIn 0.5s ease-out both; }
+.anim-scale-in { animation: scaleIn 0.4s ease-out both; }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #FAF5ED; }
+::-webkit-scrollbar-thumb { background: #895129; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #6E3F1F; }
+
+/* Carousel */
+.carousel-track { display: flex; transition: transform 0.5s ease; }
+.carousel-slide { min-width: 100%; }
+
+/* Modal */
+.modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+
+/* Dog SVG illustrations */
+.dog-silhouette { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+
+/* Tab underline */
+.tab-active { position: relative; }
+.tab-active::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 3px; background: #895129; border-radius: 2px;
+}
+
+/* Card hover */
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(137,81,41,0.15); }
+
+/* Image placeholder patterns */
+.img-placeholder {
+  background: linear-gradient(135deg, #E8D5B8 0%, #D4C4A8 50%, #C9B897 100%);
+  position: relative; overflow: hidden;
+}
+.img-placeholder::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.2) 0%, transparent 60%);
+}
+
+/* Lightbox */
+.lightbox { background: rgba(0,0,0,0.9); }
+
+/* Form focus */
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: #895129; box-shadow: 0 0 0 3px rgba(137,81,41,0.15);
+}
+
+/* Mobile menu */
+.mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.mobile-menu.open { max-height: 500px; }
+
+/* Paw print decoration */
+.paw-decoration { opacity: 0.06; }
+
+/* Sticky header */
+.site-header { transition: all 0.3s ease; }
+.site-header.scrolled { background: rgba(250,245,237,0.97); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-beige-light">
+  <div id="app-root" class="w-full h-full overflow-auto">
+   <!-- ============ HEADER ============ -->
+   <header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo --> <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-2 group">
+       <svg class="w-8 h-8 sm:w-10 sm:h-10 text-brown transition-transform group-hover:scale-110" viewbox="0 0 40 40" fill="currentColor">
+        <path d="M20 4c-2 0-3.5 2-3.5 4.5S18 13 20 13s3.5-2.5 3.5-4.5S22 4 20 4zm-8 4c-1.8 0-3 1.5-3 3.5s1.5 3.5 3 3.5 3-1.5 3-3.5-1.2-3.5-3-3.5zm16 0c-1.8 0-3 1.5-3 3.5s1.2 3.5 3 3.5 3-1.5 3-3.5-1.2-3.5-3-3.5zM20 15c-5 0-10 4-10 10 0 4 2 7 5 8.5 1.5.8 3 1.5 5 1.5s3.5-.7 5-1.5c3-1.5 5-4.5 5-8.5 0-6-5-10-10-10z" />
+       </svg><span id="header-kennel-name" class="font-display text-lg sm:text-xl font-bold text-brown">Golden Paws</span> </a> <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+       <button onclick="navigateTo('home')" class="nav-link px-3 py-2 text-sm font-medium text-black/70 hover:text-brown transition-colors rounded-lg hover:bg-brown/5">Home</button> <button onclick="navigateTo('breed')" class="nav-link px-3 py-2 text-sm font-medium text-black/70 hover:text-brown transition-colors rounded-lg hover:bg-brown/5">The Breed</button> <button onclick="navigateTo('dogs')" class="nav-link px-3 py-2 text-sm font-medium text-black/70 hover:text-brown transition-colors rounded-lg hover:bg-brown/5">Our Dogs</button> <button onclick="navigateTo('litters')" class="nav-link px-3 py-2 text-sm font-medium text-black/70 hover:text-brown transition-colors rounded-lg hover:bg-brown/5">Litters</button> <button onclick="navigateTo('gallery')" class="nav-link px-3 py-2 text-sm font-medium text-black/70 hover:text-brown transition-colors rounded-lg hover:bg-brown/5">Gallery</button> <button onclick="navigateTo('contact')" class="nav-link ml-2 px-5 py-2.5 text-sm font-semibold text-white bg-brown hover:bg-brown-dark transition-all rounded-full shadow-md hover:shadow-lg">Contact</button>
+      </nav><!-- Mobile Menu Toggle --> <button id="menu-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2 text-brown" aria-label="Toggle menu"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+     </div><!-- Mobile Menu -->
+     <nav id="mobile-menu" class="mobile-menu md:hidden pb-4" role="navigation" aria-label="Mobile navigation">
+      <div class="flex flex-col gap-1 bg-cream rounded-2xl p-4 shadow-lg border border-beige-dark/30">
+       <button onclick="navigateTo('home'); toggleMobileMenu();" class="px-4 py-3 text-left font-medium text-black/80 hover:text-brown hover:bg-beige/50 rounded-xl transition-all">Home</button> <button onclick="navigateTo('breed'); toggleMobileMenu();" class="px-4 py-3 text-left font-medium text-black/80 hover:text-brown hover:bg-beige/50 rounded-xl transition-all">The Breed</button> <button onclick="navigateTo('dogs'); toggleMobileMenu();" class="px-4 py-3 text-left font-medium text-black/80 hover:text-brown hover:bg-beige/50 rounded-xl transition-all">Our Dogs</button> <button onclick="navigateTo('litters'); toggleMobileMenu();" class="px-4 py-3 text-left font-medium text-black/80 hover:text-brown hover:bg-beige/50 rounded-xl transition-all">Litters</button> <button onclick="navigateTo('gallery'); toggleMobileMenu();" class="px-4 py-3 text-left font-medium text-black/80 hover:text-brown hover:bg-beige/50 rounded-xl transition-all">Gallery</button> <button onclick="navigateTo('contact'); toggleMobileMenu();" class="mt-2 px-4 py-3 text-center font-semibold text-white bg-brown hover:bg-brown-dark rounded-xl transition-all">Contact Us</button>
+      </div>
+     </nav>
+    </div>
+   </header><!-- ============ PAGES CONTAINER ============ -->
+   <main id="pages-container">
+    <!-- ==================== HOME PAGE ==================== -->
+    <div id="page-home" class="page-content">
+     <!-- Hero -->
+     <section class="relative overflow-hidden" style="min-height: 90%;">
+      <div class="absolute inset-0 bg-gradient-to-br from-beige via-beige-light to-beige-dark"></div><!-- Decorative circles -->
+      <div class="absolute top-20 right-10 w-64 h-64 bg-brown/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 left-10 w-80 h-80 bg-brown/3 rounded-full blur-3xl"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 pb-20">
+       <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left">
+         <div class="anim-fade-up inline-flex items-center gap-2 px-4 py-2 bg-brown/10 rounded-full text-brown text-sm font-medium mb-6">
+          <svg class="w-4 h-4" viewbox="0 0 20 20" fill="currentColor"><path d="M10 2c-1.5 0-2.5 1.5-2.5 3.5S8.5 9 10 9s2.5-1.5 2.5-3.5S11.5 2 10 2zM5 5c-1.2 0-2 1-2 2.5S4 10 5 10s2-1 2-2.5S6.2 5 5 5zm10 0c-1.2 0-2 1-2 2.5s.8 2.5 2 2.5 2-1 2-2.5S16.2 5 15 5zM10 10.5c-3.5 0-7 3-7 7 0 0 2 2.5 7 2.5s7-2.5 7-2.5c0-4-3.5-7-7-7z" />
+          </svg> Est. 2009 — Breeding Excellence
+         </div>
+         <h1 id="hero-headline" class="anim-fade-up-d1 font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black leading-tight">Labrador,<br><span class="text-brown italic">um animal para se apaixonar</span></h1>
+         <p id="hero-subheadline" class="anim-fade-up-d2 mt-6 text-lg sm:text-xl text-black/60 max-w-lg mx-auto lg:mx-0 font-light leading-relaxed">O Labrador Retriever é um animal dócil, brincalhão e muito fiel. Conheça nossos cães criados em um ambiente saudável, com muito amor e atenção.</p>
+         <div class="anim-fade-up-d3 mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <button onclick="navigateTo('contact')" class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brown text-white font-semibold rounded-full shadow-lg shadow-brown/25 hover:bg-brown-dark hover:shadow-xl hover:shadow-brown/30 transition-all hover:-translate-y-0.5"> <i data-lucide="message-circle" class="w-5 h-5"></i> Contact via WhatsApp </button> <button onclick="navigateTo('litters')" class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/80 text-brown font-semibold rounded-full border-2 border-brown/20 hover:border-brown/40 hover:bg-white transition-all"> View Our Puppies <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i> </button>
+         </div>
+        </div><!-- Hero Image Area -->
+        <div class="anim-fade-up-d2 relative">
+         <div class="relative mx-auto w-full max-w-md lg:max-w-lg">
+          <div class="absolute inset-0 bg-brown/10 rounded-[3rem] rotate-3 scale-105"></div>
+          <div class="relative img-placeholder rounded-[2.5rem] aspect-[4/5] flex items-end justify-center overflow-hidden">
+           <!-- SVG Labrador illustration -->
+           <svg class="w-4/5 mb-8 dog-silhouette" viewbox="0 0 300 280" fill="none">
+            <ellipse cx="150" cy="265" rx="100" ry="12" fill="rgba(0,0,0,0.08)" /> <!-- Body --> <path d="M90 160 C90 120 110 90 150 85 C190 90 210 120 210 160 L210 220 C210 245 195 260 150 260 C105 260 90 245 90 220 Z" fill="#C4944A" /> <path d="M100 160 C100 125 115 100 150 95 C185 100 200 125 200 160 L200 215 C200 238 188 250 150 250 C112 250 100 238 100 215 Z" fill="#D4A85A" /> <!-- Head --> <ellipse cx="150" cy="82" rx="48" ry="42" fill="#C4944A" /> <ellipse cx="150" cy="80" rx="44" ry="38" fill="#D4A85A" /> <!-- Ears --> <ellipse cx="108" cy="72" rx="18" ry="28" transform="rotate(-15 108 72)" fill="#B38540" /> <ellipse cx="192" cy="72" rx="18" ry="28" transform="rotate(15 192 72)" fill="#B38540" /> <!-- Eyes --> <ellipse cx="135" cy="75" rx="6" ry="7" fill="#3D2B1F" /> <ellipse cx="165" cy="75" rx="6" ry="7" fill="#3D2B1F" /> <circle cx="137" cy="73" r="2" fill="white" opacity="0.6" /> <circle cx="167" cy="73" r="2" fill="white" opacity="0.6" /> <!-- Nose --> <ellipse cx="150" cy="92" rx="10" ry="7" fill="#3D2B1F" /> <ellipse cx="150" cy="90" rx="4" ry="2" fill="#5A4030" opacity="0.4" /> <!-- Mouth --> <path d="M145 97 Q150 103 155 97" stroke="#3D2B1F" stroke-width="1.5" fill="none" /> <!-- Tongue --> <path d="M147 98 Q150 110 153 98" fill="#E87B7B" /> <!-- Chest highlight --> <path d="M130 130 Q150 115 170 130 L165 170 Q150 160 135 170 Z" fill="#E0BE78" opacity="0.5" /> <!-- Front legs --> <rect x="115" y="215" width="22" height="40" rx="11" fill="#C4944A" /> <rect x="163" y="215" width="22" height="40" rx="11" fill="#C4944A" /> <ellipse cx="126" cy="256" rx="14" ry="6" fill="#B38540" /> <ellipse cx="174" cy="256" rx="14" ry="6" fill="#B38540" /> <!-- Tail --> <path d="M210 170 Q235 145 230 120" stroke="#C4944A" stroke-width="14" stroke-linecap="round" fill="none" />
+           </svg>
+          </div>
+         </div><!-- Floating badges -->
+         <div class="absolute top-8 -left-4 sm:left-0 anim-fade-up-d3 bg-white rounded-2xl shadow-lg p-3 flex items-center gap-3">
+          <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5 text-green-600"></i>
+          </div>
+          <div>
+           <p class="text-xs font-bold text-black">Health Tested</p>
+           <p class="text-xs text-black/50">All parents certified</p>
+          </div>
+         </div>
+         <div class="absolute bottom-16 -right-4 sm:right-0 anim-fade-up-d4 bg-white rounded-2xl shadow-lg p-3 flex items-center gap-3">
+          <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center"><i data-lucide="heart" class="w-5 h-5 text-amber-600"></i>
+          </div>
+          <div>
+           <p class="text-xs font-bold text-black">200+ Families</p>
+           <p class="text-xs text-black/50">Happy forever homes</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Wave divider -->
+      <div class="absolute bottom-0 left-0 right-0">
+       <svg viewbox="0 0 1440 60" fill="none" class="w-full"><path d="M0 30 Q360 0 720 30 Q1080 60 1440 30 L1440 60 L0 60 Z" fill="#FFFDF8" />
+       </svg>
+      </div>
+     </section><!-- About Summary -->
+     <section class="bg-cream py-20 sm:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="reveal">
+         <span class="text-brown font-semibold text-sm tracking-widest uppercase">Our Story</span>
+         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-black mt-3 leading-tight">Nossa <span class="text-brown italic">História</span></h2>
+         <p id="about-text" class="mt-6 text-black/60 text-lg leading-relaxed">O Canil Massister iniciou suas atividades com um objetivo claro: proporcionar aos amantes da raça Labrador Retriever animais criados em um ambiente saudável, com muito amor e atenção. Desde o princípio, o respeito e o amor aos animais é nossa maior virtude e nossa maior preocupação. Oferecemos uma estrutura com poucos animais, tratados em um ambiente extremamente saudável, onde desfrutam de liberdade para correr e brincar, alimentação de qualidade superior e acompanhamento veterinário constante.</p>
+         <div class="mt-8 flex flex-wrap gap-8">
+          <div>
+           <p class="text-3xl font-display font-bold text-brown">Área Verde</p>
+           <p class="text-sm text-black/50 mt-1">Ambiente Privilegiado</p>
+          </div>
+          <div>
+           <p class="text-3xl font-display font-bold text-brown">Amor</p>
+           <p class="text-sm text-black/50 mt-1">Principal Virtude</p>
+          </div>
+          <div>
+           <p class="text-3xl font-display font-bold text-brown">100%</p>
+           <p class="text-sm text-black/50 mt-1">Cuidado Veterinário</p>
+          </div>
+         </div><button onclick="navigateTo('breed')" class="mt-8 inline-flex items-center gap-2 text-brown font-semibold hover:gap-3 transition-all"> Conheça mais sobre a raça <i data-lucide="arrow-right" class="w-4 h-4"></i> </button>
+        </div>
+        <div class="reveal reveal-d1 relative">
+         <div class="grid grid-cols-2 gap-4">
+          <div class="img-placeholder rounded-2xl aspect-[3/4] flex items-center justify-center">
+           <svg class="w-20 h-20 text-brown/20" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+          <div class="img-placeholder rounded-2xl aspect-[3/4] mt-8 flex items-center justify-center">
+           <svg class="w-20 h-20 text-brown/20" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+         </div>
+         <div class="absolute -bottom-4 -left-4 w-24 h-24 border-2 border-brown/20 rounded-2xl"></div>
+         <div class="absolute -top-4 -right-4 w-24 h-24 border-2 border-brown/20 rounded-2xl"></div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Differentiators -->
+     <section class="bg-beige-light py-20 sm:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Why Choose Us</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Our <span class="text-brown italic">Commitment</span></h2>
+       </div>
+       <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal reveal-d1 card-hover bg-cream rounded-3xl p-8 text-center border border-beige-dark/20">
+         <div class="w-16 h-16 mx-auto bg-brown/10 rounded-2xl flex items-center justify-center mb-5">
+          <i data-lucide="heart" class="w-7 h-7 text-brown"></i>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Animal Welfare</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Every dog lives in a family environment with love, space, and top-tier veterinary care.</p>
+        </div>
+        <div class="reveal reveal-d2 card-hover bg-cream rounded-3xl p-8 text-center border border-beige-dark/20">
+         <div class="w-16 h-16 mx-auto bg-brown/10 rounded-2xl flex items-center justify-center mb-5">
+          <i data-lucide="award" class="w-7 h-7 text-brown"></i>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Proven Lineage</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Champion bloodlines with documented pedigrees going back multiple generations.</p>
+        </div>
+        <div class="reveal reveal-d3 card-hover bg-cream rounded-3xl p-8 text-center border border-beige-dark/20">
+         <div class="w-16 h-16 mx-auto bg-brown/10 rounded-2xl flex items-center justify-center mb-5">
+          <i data-lucide="phone" class="w-7 h-7 text-brown"></i>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Ongoing Support</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Lifetime guidance for every family — from puppy care to training advice and beyond.</p>
+        </div>
+        <div class="reveal reveal-d4 card-hover bg-cream rounded-3xl p-8 text-center border border-beige-dark/20">
+         <div class="w-16 h-16 mx-auto bg-brown/10 rounded-2xl flex items-center justify-center mb-5">
+          <i data-lucide="dna" class="w-7 h-7 text-brown"></i>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Genetic Quality</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Comprehensive health testing including hip, elbow, eye, and cardiac evaluations.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- Testimonials -->
+     <section class="bg-brown py-20 sm:py-28 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+       <svg class="w-full h-full" viewbox="0 0 400 400"><pattern id="paws" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+         <path d="M40 10c-2 0-3.5 2-3.5 5s1.5 5 3.5 5 3.5-2 3.5-5-1.5-5-3.5-5zm-9 4c-1.5 0-2.5 1.5-2.5 3.5s1 3.5 2.5 3.5 2.5-1.5 2.5-3.5-1-3.5-2.5-3.5zm18 0c-1.5 0-2.5 1.5-2.5 3.5s1 3.5 2.5 3.5 2.5-1.5 2.5-3.5-1-3.5-2.5-3.5zM40 22c-5 0-9 3.5-9 8s2 5 9 5 9 0 9-5-4-8-9-8z" fill="white" />
+        </pattern><rect width="400" height="400" fill="url(#paws)" />
+       </svg>
+      </div>
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <div class="reveal">
+        <span class="text-white/60 font-semibold text-sm tracking-widest uppercase">Depoimentos</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Famílias <span class="italic">Felizes</span></h2>
+       </div>
+       <div class="mt-12 relative overflow-hidden" id="testimonial-carousel">
+        <div class="carousel-track" id="testimonial-track">
+         <div class="carousel-slide px-4">
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 sm:p-10 border border-white/10">
+           <div class="flex justify-center mb-4">
+            <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i>
+           </div>
+           <p class="text-white/90 text-lg italic leading-relaxed">"Our Lab from Golden Paws is the most loving, well-tempered dog we could have ever asked for. The entire experience was wonderful from start to finish."</p>
+           <p class="mt-6 text-white font-semibold">— The Martinez Family</p>
+          </div>
+         </div>
+         <div class="carousel-slide px-4">
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 sm:p-10 border border-white/10">
+           <div class="flex justify-center mb-4">
+            <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i>
+           </div>
+           <p class="text-white/90 text-lg italic leading-relaxed">"Professional, caring, and truly passionate about their dogs. We felt supported every step of the way. Our puppy came home healthy and happy!"</p>
+           <p class="mt-6 text-white font-semibold">— Sarah &amp; Tom W.</p>
+          </div>
+         </div>
+         <div class="carousel-slide px-4">
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 sm:p-10 border border-white/10">
+           <div class="flex justify-center mb-4">
+            <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i>
+           </div>
+           <p class="text-white/90 text-lg italic leading-relaxed">"Two years later and our boy is still the best decision we ever made. The breeder's ongoing support has been invaluable for first-time dog owners."</p>
+           <p class="mt-6 text-white font-semibold">— The Andersons</p>
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center gap-3 mt-8">
+         <button onclick="moveTestimonial(-1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all" aria-label="Previous testimonial"> <i data-lucide="chevron-left" class="w-5 h-5"></i> </button>
+         <div id="testimonial-dots" class="flex items-center gap-2">
+          <button onclick="goToTestimonial(0)" class="w-2.5 h-2.5 rounded-full bg-white transition-all" aria-label="Testimonial 1"></button> <button onclick="goToTestimonial(1)" class="w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Testimonial 2"></button> <button onclick="goToTestimonial(2)" class="w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Testimonial 3"></button>
+         </div><button onclick="moveTestimonial(1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all" aria-label="Next testimonial"> <i data-lucide="chevron-right" class="w-5 h-5"></i> </button>
+        </div>
+       </div>
+      </div>
+     </section><!-- Litters Preview -->
+     <section class="bg-cream py-20 sm:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Ninhadas Atuais</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Filhotes <span class="text-brown italic">Disponíveis</span></h2>
+       </div>
+       <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="reveal reveal-d1 card-hover bg-white rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="navigateTo('litters')">
+         <div class="img-placeholder aspect-[4/3] flex items-center justify-center">
+          <svg class="w-24 h-24 text-brown/15" viewbox="0 0 100 100" fill="currentColor"><circle cx="35" cy="45" r="16" /><circle cx="65" cy="45" r="16" /><circle cx="50" cy="65" r="16" />
+          </svg>
+         </div>
+         <div class="p-6">
+          <div class="flex items-center justify-between">
+           <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Available</span> <span class="text-xs text-black/40">Born Jan 2025</span>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black mt-3">Spring Litter</h3>
+          <p class="text-sm text-black/50 mt-1">Luna × Duke — 7 puppies</p>
+         </div>
+        </div>
+        <div class="reveal reveal-d2 card-hover bg-white rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="navigateTo('litters')">
+         <div class="img-placeholder aspect-[4/3] flex items-center justify-center">
+          <svg class="w-24 h-24 text-brown/15" viewbox="0 0 100 100" fill="currentColor"><circle cx="35" cy="45" r="16" /><circle cx="65" cy="45" r="16" /><circle cx="50" cy="65" r="16" />
+          </svg>
+         </div>
+         <div class="p-6">
+          <div class="flex items-center justify-between">
+           <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">2 Remaining</span> <span class="text-xs text-black/40">Born Nov 2024</span>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black mt-3">Autumn Litter</h3>
+          <p class="text-sm text-black/50 mt-1">Bella × Max — 5 puppies</p>
+         </div>
+        </div>
+        <div class="reveal reveal-d3 card-hover bg-white rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="navigateTo('litters')">
+         <div class="img-placeholder aspect-[4/3] flex items-center justify-center">
+          <svg class="w-24 h-24 text-brown/15" viewbox="0 0 100 100" fill="currentColor"><circle cx="35" cy="45" r="16" /><circle cx="65" cy="45" r="16" /><circle cx="50" cy="65" r="16" />
+          </svg>
+         </div>
+         <div class="p-6">
+          <div class="flex items-center justify-between">
+           <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Coming Soon</span> <span class="text-xs text-black/40">Expected Mar 2025</span>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black mt-3">Spring Litter II</h3>
+          <p class="text-sm text-black/50 mt-1">Daisy × Charlie — Expected</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Final CTA -->
+     <section class="bg-beige py-20 sm:py-28">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+       <svg class="w-16 h-16 mx-auto text-brown/30 mb-6" viewbox="0 0 60 60" fill="currentColor"><path d="M30 6c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-12 5c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm24 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM30 23c-8 0-14 5-14 12 0 5 3 8 6 10 2 1 5 2 8 2s6-1 8-2c3-2 6-5 6-10 0-7-6-12-14-12z" />
+       </svg>
+       <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-black">Pronto para<br><span class="text-brown italic">Um Novo Membro?</span></h2>
+       <p class="mt-6 text-black/55 text-lg max-w-xl mx-auto">Fale conosco para conhecer nossos filhotes disponíveis, ninhadas planejadas ou simplesmente para fazer perguntas. Adoraríamos ouvir você!</p><button onclick="navigateTo('contact')" class="mt-10 inline-flex items-center gap-3 px-10 py-5 bg-brown text-white font-semibold rounded-full shadow-lg shadow-brown/25 hover:bg-brown-dark hover:shadow-xl transition-all hover:-translate-y-0.5 text-lg"> <i data-lucide="message-circle" class="w-6 h-6"></i> Entre em Contato via WhatsApp </button>
+      </div>
+     </section>
+    </div><!-- ==================== BREED PAGE ==================== -->
+    <div id="page-breed" class="page-content hidden">
+     <!-- Breed Hero -->
+     <section class="bg-beige pt-28 sm:pt-36 pb-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <span class="text-brown font-semibold text-sm tracking-widest uppercase anim-fade-up">Sobre a Raça</span>
+       <h1 class="anim-fade-up-d1 font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black mt-3">O Labrador<br><span class="text-brown italic">Retriever</span></h1>
+       <p class="anim-fade-up-d2 mt-6 text-black/55 text-lg max-w-2xl mx-auto">Uma das raças mais populares do mundo, conhecida por seu temperamento amigável, inteligência excepcional e lealdade inquestionável. O Labrador Retriever é verdadeiramente um animal para se apaixonar.</p>
+      </div>
+     </section><!-- Anatomy -->
+     <section class="bg-cream py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-14 reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Características Físicas</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Anatomia da <span class="text-brown italic">Raça</span></h2>
+       </div>
+       <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal relative flex justify-center">
+         <!-- Annotated dog diagram -->
+         <svg viewbox="0 0 500 400" class="w-full max-w-md" fill="none">
+          <!-- Body outline --> <ellipse cx="250" cy="230" rx="130" ry="80" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1.5" /> <!-- Head --> <ellipse cx="250" cy="130" rx="65" ry="55" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1.5" /> <!-- Ears --> <ellipse cx="195" cy="115" rx="22" ry="32" transform="rotate(-15 195 115)" fill="#C4944A" opacity="0.3" stroke="#895129" stroke-width="1" /> <ellipse cx="305" cy="115" rx="22" ry="32" transform="rotate(15 305 115)" fill="#C4944A" opacity="0.3" stroke="#895129" stroke-width="1" /> <!-- Legs --> <rect x="175" y="285" width="28" height="60" rx="14" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1" /> <rect x="225" y="285" width="28" height="60" rx="14" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1" /> <rect x="280" y="285" width="28" height="60" rx="14" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1" /> <rect x="320" y="285" width="28" height="60" rx="14" fill="#D4A85A" opacity="0.3" stroke="#895129" stroke-width="1" /> <!-- Tail --> <path d="M380 220 Q420 190 410 155" stroke="#895129" stroke-width="1.5" fill="none" stroke-linecap="round" /> <!-- Annotation lines --> <line x1="250" y1="75" x2="250" y2="45" stroke="#895129" stroke-width="1" stroke-dasharray="3" /> <line x1="185" y1="95" x2="130" y2="70" stroke="#895129" stroke-width="1" stroke-dasharray="3" /> <line x1="410" y1="160" x2="440" y2="135" stroke="#895129" stroke-width="1" stroke-dasharray="3" /> <line x1="250" y1="230" x2="70" y2="230" stroke="#895129" stroke-width="1" stroke-dasharray="3" /> <line x1="200" y1="340" x2="120" y2="360" stroke="#895129" stroke-width="1" stroke-dasharray="3" /> <!-- Labels --> <text x="250" y="38" text-anchor="middle" fill="#895129" font-size="12" font-weight="600">
+           Broad skull
+          </text> <text x="125" y="63" text-anchor="end" fill="#895129" font-size="12" font-weight="600">
+           Pendant ears
+          </text> <text x="445" y="130" fill="#895129" font-size="12" font-weight="600">
+           Otter tail
+          </text> <text x="65" y="225" text-anchor="end" fill="#895129" font-size="12" font-weight="600">
+           Deep chest
+          </text> <text x="115" y="365" text-anchor="end" fill="#895129" font-size="12" font-weight="600">
+           Strong legs
+          </text>
+         </svg>
+        </div>
+        <div class="reveal reveal-d1 space-y-4">
+         <div class="flex gap-4 items-start p-4 bg-beige-light rounded-2xl">
+          <div class="w-10 h-10 flex-shrink-0 bg-brown/10 rounded-xl flex items-center justify-center"><i data-lucide="ruler" class="w-5 h-5 text-brown"></i>
+          </div>
+          <div>
+           <h4 class="font-bold text-black">Tamanho</h4>
+           <p class="text-sm text-black/55">Machos: 57–62 cm | Fêmeas: 55–60 cm</p>
+          </div>
+         </div>
+         <div class="flex gap-4 items-start p-4 bg-beige-light rounded-2xl">
+          <div class="w-10 h-10 flex-shrink-0 bg-brown/10 rounded-xl flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5 text-brown"></i>
+          </div>
+          <div>
+           <h4 class="font-bold text-black">Peso</h4>
+           <p class="text-sm text-black/55">Machos: 29–36 kg | Fêmeas: 25–32 kg</p>
+          </div>
+         </div>
+         <div class="flex gap-4 items-start p-4 bg-beige-light rounded-2xl">
+          <div class="w-10 h-10 flex-shrink-0 bg-brown/10 rounded-xl flex items-center justify-center"><i data-lucide="palette" class="w-5 h-5 text-brown"></i>
+          </div>
+          <div>
+           <h4 class="font-bold text-black">Cores</h4>
+           <p class="text-sm text-black/55">Amarelo, Preto e Chocolate — pelagem dupla densa e resistente à água</p>
+          </div>
+         </div>
+         <div class="flex gap-4 items-start p-4 bg-beige-light rounded-2xl">
+          <div class="w-10 h-10 flex-shrink-0 bg-brown/10 rounded-xl flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-brown"></i>
+          </div>
+          <div>
+           <h4 class="font-bold text-black">Longevidade</h4>
+           <p class="text-sm text-black/55">10–14 anos com cuidados adequados e nutrição de qualidade</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Temperament -->
+     <section class="bg-beige-light py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-14 reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Personalidade</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Traços de <span class="text-brown italic">Temperamento</span></h2>
+       </div>
+       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div class="reveal card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15">
+         <div class="text-3xl mb-3">
+          🐾
+         </div>
+         <p class="font-bold text-sm text-black">Friendly</p>
+        </div>
+        <div class="reveal reveal-d1 card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15">
+         <div class="text-3xl mb-3">
+          🧠
+         </div>
+         <p class="font-bold text-sm text-black">Intelligent</p>
+        </div>
+        <div class="reveal reveal-d2 card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15">
+         <div class="text-3xl mb-3">
+          ⚡
+         </div>
+         <p class="font-bold text-sm text-black">Active</p>
+        </div>
+        <div class="reveal reveal-d3 card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15">
+         <div class="text-3xl mb-3">
+          🤝
+         </div>
+         <p class="font-bold text-sm text-black">Loyal</p>
+        </div>
+        <div class="reveal reveal-d4 card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15">
+         <div class="text-3xl mb-3">
+          👶
+         </div>
+         <p class="font-bold text-sm text-black">Gentle</p>
+        </div>
+        <div class="reveal card-hover bg-cream rounded-2xl p-5 text-center border border-beige-dark/15" style="transition-delay:0.5s">
+         <div class="text-3xl mb-3">
+          🎾
+         </div>
+         <p class="font-bold text-sm text-black">Playful</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- Care -->
+     <section class="bg-cream py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-14 reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Cuidados Essenciais</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Cuidando do seu <span class="text-brown italic">Labrador</span></h2>
+       </div>
+       <div class="grid sm:grid-cols-3 gap-6">
+        <div class="reveal reveal-d1 bg-white rounded-3xl p-8 border border-beige-dark/15">
+         <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-5">
+          <span class="text-2xl">🥩</span>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Nutrição</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Dieta rica em proteína de alta qualidade, adequada para sua idade e nível de atividade. Labradores têm tendência ao sobrepeso, então o controle de porções é essencial. Sempre disponha água fresca.</p>
+        </div>
+        <div class="reveal reveal-d2 bg-white rounded-3xl p-8 border border-beige-dark/15">
+         <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
+          <span class="text-2xl">🏃</span>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Exercício</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">No mínimo 1 a 2 horas de exercício diário, incluindo passeios, nado e brincadeiras. Estimulação mental através de treinamento e brinquedos é igualmente importante para esta raça inteligente.</p>
+        </div>
+        <div class="reveal reveal-d3 bg-white rounded-3xl p-8 border border-beige-dark/15">
+         <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-5">
+          <span class="text-2xl">🏥</span>
+         </div>
+         <h3 class="font-display text-xl font-bold text-black">Saúde</h3>
+         <p class="mt-3 text-black/55 text-sm leading-relaxed">Consultas veterinárias regulares, vacinações e cuidados preventivos. Fique atento a condições específicas da raça como displasia de quadril e problemas oculares. Cuidados dentários e banho também são essenciais.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- Breed Gallery -->
+     <section class="bg-beige-light py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-14 reveal">
+        <span class="text-brown font-semibold text-sm tracking-widest uppercase">Cores e Variedades</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mt-3">Labradores <span class="text-brown italic">Lindos</span></h2>
+       </div>
+       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        <div class="img-placeholder rounded-2xl aspect-square flex flex-col items-center justify-center gap-3" style="background: linear-gradient(135deg, #F5E6A3, #D4A85A);">
+         <svg class="w-20 h-20 text-brown/25" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+         </svg><span class="font-display font-bold text-brown/50">Yellow</span>
+        </div>
+        <div class="img-placeholder rounded-2xl aspect-square flex flex-col items-center justify-center gap-3" style="background: linear-gradient(135deg, #3D3D3D, #1A1A1A);">
+         <svg class="w-20 h-20 text-white/20" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+         </svg><span class="font-display font-bold text-white/40">Black</span>
+        </div>
+        <div class="img-placeholder rounded-2xl aspect-square flex flex-col items-center justify-center gap-3 col-span-2 lg:col-span-1" style="background: linear-gradient(135deg, #8B6B4A, #5C3D2E);">
+         <svg class="w-20 h-20 text-white/20" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+         </svg><span class="font-display font-bold text-white/40">Chocolate</span>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== DOGS PAGE ==================== -->
+    <div id="page-dogs" class="page-content hidden">
+     <section class="bg-beige pt-28 sm:pt-36 pb-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <span class="text-brown font-semibold text-sm tracking-widest uppercase anim-fade-up">Meet Our Dogs</span>
+       <h1 class="anim-fade-up-d1 font-display text-4xl sm:text-5xl font-bold text-black mt-3">Dams &amp; <span class="text-brown italic">Sires</span></h1>
+       <p class="anim-fade-up-d2 mt-4 text-black/55 text-lg max-w-xl mx-auto">Our carefully selected breeding dogs — champions in temperament, health, and beauty.</p>
+      </div>
+     </section><!-- Tabs -->
+     <section class="bg-beige pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="flex justify-center gap-4 mb-12">
+        <button onclick="switchDogTab('dams')" id="tab-dams" class="tab-active px-8 py-3 font-semibold text-brown border-b-2 border-brown transition-all">Dams</button> <button onclick="switchDogTab('sires')" id="tab-sires" class="px-8 py-3 font-semibold text-black/40 border-b-2 border-transparent hover:text-brown transition-all">Sires</button>
+       </div><!-- Dams -->
+       <div id="dogs-dams" class="space-y-6">
+        <div class="card-hover bg-cream rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="openDogModal('luna')">
+         <div class="flex flex-col md:flex-row">
+          <div class="md:w-2/5 img-placeholder aspect-square md:aspect-auto flex items-center justify-center">
+           <svg class="w-28 h-28 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+          <div class="md:w-3/5 p-6 sm:p-8 flex flex-col justify-center">
+           <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-bold rounded-full">♀ Dam</span> <span class="text-xs text-black/40">4 years old</span>
+           </div>
+           <h3 class="font-display text-2xl font-bold text-black">Luna</h3>
+           <p class="mt-2 text-black/55 leading-relaxed">A gentle and loving mother with a calm temperament. Luna excels in obedience and has an incredible bond with children. Her puppies consistently display the best traits of the breed.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Gentle</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">OFA Excellent</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Champion Line</span>
+           </div>
+           <p class="mt-4 text-brown text-sm font-semibold flex items-center gap-1">View full profile <i data-lucide="arrow-right" class="w-4 h-4"></i></p>
+          </div>
+         </div>
+        </div>
+        <div class="card-hover bg-cream rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="openDogModal('bella')">
+         <div class="flex flex-col md:flex-row">
+          <div class="md:w-2/5 img-placeholder aspect-square md:aspect-auto flex items-center justify-center" style="background: linear-gradient(135deg, #D4C4A8 0%, #C4B498 50%, #B8A888 100%);">
+           <svg class="w-28 h-28 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+          <div class="md:w-3/5 p-6 sm:p-8 flex flex-col justify-center">
+           <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-bold rounded-full">♀ Dam</span> <span class="text-xs text-black/40">3 years old</span>
+           </div>
+           <h3 class="font-display text-2xl font-bold text-black">Bella</h3>
+           <p class="mt-2 text-black/55 leading-relaxed">Energetic and playful with a beautiful coat. Bella comes from an outstanding champion lineage and passes her athletic build and loving personality to all her puppies.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Athletic</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">OFA Good</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">CERF Clear</span>
+           </div>
+           <p class="mt-4 text-brown text-sm font-semibold flex items-center gap-1">View full profile <i data-lucide="arrow-right" class="w-4 h-4"></i></p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Sires -->
+       <div id="dogs-sires" class="space-y-6 hidden">
+        <div class="card-hover bg-cream rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="openDogModal('duke')">
+         <div class="flex flex-col md:flex-row">
+          <div class="md:w-2/5 img-placeholder aspect-square md:aspect-auto flex items-center justify-center" style="background: linear-gradient(135deg, #C9B897 0%, #B8A580 50%, #A89470 100%);">
+           <svg class="w-28 h-28 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+          <div class="md:w-3/5 p-6 sm:p-8 flex flex-col justify-center">
+           <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">♂ Sire</span> <span class="text-xs text-black/40">5 years old</span>
+           </div>
+           <h3 class="font-display text-2xl font-bold text-black">Duke</h3>
+           <p class="mt-2 text-black/55 leading-relaxed">A magnificent male with an impressive build and confident temperament. Duke's puppies are known for their excellent structure and gentle disposition. Multi-champion bloodline.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Strong Build</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">OFA Excellent</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Multi-Champion</span>
+           </div>
+           <p class="mt-4 text-brown text-sm font-semibold flex items-center gap-1">View full profile <i data-lucide="arrow-right" class="w-4 h-4"></i></p>
+          </div>
+         </div>
+        </div>
+        <div class="card-hover bg-cream rounded-3xl overflow-hidden border border-beige-dark/15 cursor-pointer" onclick="openDogModal('max')">
+         <div class="flex flex-col md:flex-row">
+          <div class="md:w-2/5 img-placeholder aspect-square md:aspect-auto flex items-center justify-center" style="background: linear-gradient(135deg, #3D3D3D, #2A2A2A);">
+           <svg class="w-28 h-28 text-white/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+           </svg>
+          </div>
+          <div class="md:w-3/5 p-6 sm:p-8 flex flex-col justify-center">
+           <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">♂ Sire</span> <span class="text-xs text-black/40">4 years old</span>
+           </div>
+           <h3 class="font-display text-2xl font-bold text-black">Max</h3>
+           <p class="mt-2 text-black/55 leading-relaxed">A striking black Labrador with impeccable movement and a sweet personality. Max brings exceptional bone structure and a wonderful coat to his offspring. Fully health tested.</p>
+           <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">Beautiful Coat</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">EIC Clear</span> <span class="px-3 py-1 bg-brown/5 text-brown text-xs font-medium rounded-full">CNM Clear</span>
+           </div>
+           <p class="mt-4 text-brown text-sm font-semibold flex items-center gap-1">View full profile <i data-lucide="arrow-right" class="w-4 h-4"></i></p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== LITTERS PAGE ==================== -->
+    <div id="page-litters" class="page-content hidden">
+     <section class="bg-beige pt-28 sm:pt-36 pb-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <span class="text-brown font-semibold text-sm tracking-widest uppercase anim-fade-up">Litters &amp; Puppies</span>
+       <h1 class="anim-fade-up-d1 font-display text-4xl sm:text-5xl font-bold text-black mt-3">Our <span class="text-brown italic">Puppies</span></h1>
+      </div>
+     </section><!-- Litter 1 -->
+     <section class="bg-cream py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <!-- Parents -->
+       <div class="reveal bg-white rounded-3xl p-6 sm:p-10 border border-beige-dark/15 mb-8">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+         <div>
+          <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Available</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-black mt-2">Spring Litter 2025</h2>
+          <p class="text-black/50 text-sm mt-1">Born January 15, 2025 — 7 puppies</p>
+         </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+         <div class="flex items-center gap-4 bg-beige-light rounded-2xl p-4">
+          <div class="w-20 h-20 flex-shrink-0 img-placeholder rounded-xl flex items-center justify-center">
+           <svg class="w-10 h-10 text-brown/20" viewbox="0 0 40 40" fill="currentColor"><path d="M20 4c-2 0-3 2-3 4s1 4 3 4 3-2 3-4-1-4-3-4zm-7 3c-1.5 0-2.5 1-2.5 3s1 3 2.5 3 2.5-1 2.5-3-1-3-2.5-3zm14 0c-1.5 0-2.5 1-2.5 3s1 3 2.5 3 2.5-1 2.5-3-1-3-2.5-3zM20 14c-5 0-9 3.5-9 8s2 4 9 4 9 1 9-4-4-8-9-8z" />
+           </svg>
+          </div>
+          <div>
+           <span class="text-xs text-pink-600 font-bold">♀ Dam</span>
+           <h4 class="font-display font-bold text-black">Luna</h4>
+           <p class="text-xs text-black/50">Yellow Labrador, 4 yrs</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-4 bg-beige-light rounded-2xl p-4">
+          <div class="w-20 h-20 flex-shrink-0 img-placeholder rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #C9B897, #B8A580);">
+           <svg class="w-10 h-10 text-brown/20" viewbox="0 0 40 40" fill="currentColor"><path d="M20 4c-2 0-3 2-3 4s1 4 3 4 3-2 3-4-1-4-3-4zm-7 3c-1.5 0-2.5 1-2.5 3s1 3 2.5 3 2.5-1 2.5-3-1-3-2.5-3zm14 0c-1.5 0-2.5 1-2.5 3s1 3 2.5 3 2.5-1 2.5-3-1-3-2.5-3zM20 14c-5 0-9 3.5-9 8s2 4 9 4 9 1 9-4-4-8-9-8z" />
+           </svg>
+          </div>
+          <div>
+           <span class="text-xs text-blue-600 font-bold">♂ Sire</span>
+           <h4 class="font-display font-bold text-black">Duke</h4>
+           <p class="text-xs text-black/50">Yellow Labrador, 5 yrs</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Puppies Grid -->
+       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="reveal card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #1</h4><span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full mt-1 inline-block">Available</span>
+         </div>
+        </div>
+        <div class="reveal reveal-d1 card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center" style="background: linear-gradient(135deg, #F0DFC0, #D4C4A8);"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #2</h4><span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full mt-1 inline-block">Reserved</span>
+         </div>
+        </div>
+        <div class="reveal reveal-d2 card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #3</h4><span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full mt-1 inline-block">Available</span>
+         </div>
+        </div>
+        <div class="reveal reveal-d3 card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center" style="background: linear-gradient(135deg, #F0DFC0, #D4C4A8);"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #4</h4><span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full mt-1 inline-block">Available</span>
+         </div>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #5</h4><span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full mt-1 inline-block">Reserved</span>
+         </div>
+        </div>
+        <div class="reveal reveal-d1 card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center" style="background: linear-gradient(135deg, #F0DFC0, #D4C4A8);"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #6</h4><span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full mt-1 inline-block">Available</span>
+         </div>
+        </div>
+        <div class="reveal reveal-d2 card-hover bg-white rounded-2xl overflow-hidden border border-beige-dark/15">
+         <div class="img-placeholder aspect-square flex items-center justify-center"><span class="text-4xl">🐶</span>
+         </div>
+         <div class="p-4">
+          <h4 class="font-bold text-black text-sm">Puppy #7</h4><span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full mt-1 inline-block">Reserved</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Important Info -->
+     <section class="bg-beige-light py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <h2 class="reveal font-display text-2xl sm:text-3xl font-bold text-black text-center mb-10">Important <span class="text-brown italic">Information</span></h2>
+       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal reveal-d1 bg-cream rounded-2xl p-6 border border-beige-dark/15">
+         <div class="w-12 h-12 bg-brown/10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="clipboard-list" class="w-6 h-6 text-brown"></i>
+         </div>
+         <h3 class="font-bold text-black">Reservation</h3>
+         <p class="text-sm text-black/55 mt-2">A non-refundable deposit secures your puppy. We'll guide you through every step of the selection process.</p>
+        </div>
+        <div class="reveal reveal-d2 bg-cream rounded-2xl p-6 border border-beige-dark/15">
+         <div class="w-12 h-12 bg-brown/10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="car" class="w-6 h-6 text-brown"></i>
+         </div>
+         <h3 class="font-bold text-black">Pickup</h3>
+         <p class="text-sm text-black/55 mt-2">Puppies go home at 8 weeks with a complete health package, starter kit, and care instructions.</p>
+        </div>
+        <div class="reveal reveal-d3 bg-cream rounded-2xl p-6 border border-beige-dark/15">
+         <div class="w-12 h-12 bg-brown/10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="scan" class="w-6 h-6 text-brown"></i>
+         </div>
+         <h3 class="font-bold text-black">Microchipping</h3>
+         <p class="text-sm text-black/55 mt-2">All puppies are microchipped before going to their new homes for lifelong identification and safety.</p>
+        </div>
+        <div class="reveal reveal-d4 bg-cream rounded-2xl p-6 border border-beige-dark/15">
+         <div class="w-12 h-12 bg-brown/10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="syringe" class="w-6 h-6 text-brown"></i>
+         </div>
+         <h3 class="font-bold text-black">Vaccination</h3>
+         <p class="text-sm text-black/55 mt-2">First vaccinations and deworming completed on schedule. Full veterinary records provided.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- Litters CTA -->
+     <section class="bg-brown py-16 text-center">
+      <div class="max-w-xl mx-auto px-4">
+       <h2 class="font-display text-3xl font-bold text-white">Interested in a Puppy?</h2>
+       <p class="mt-4 text-white/70">Reach out to learn about availability, pricing, and our adoption process.</p><button onclick="navigateTo('contact')" class="mt-8 inline-flex items-center gap-2 px-8 py-4 bg-white text-brown font-semibold rounded-full shadow-lg hover:bg-beige transition-all hover:-translate-y-0.5"> <i data-lucide="message-circle" class="w-5 h-5"></i> Contact via WhatsApp </button>
+      </div>
+     </section>
+    </div><!-- ==================== GALLERY PAGE ==================== -->
+    <div id="page-gallery" class="page-content hidden">
+     <section class="bg-beige pt-28 sm:pt-36 pb-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <span class="text-brown font-semibold text-sm tracking-widest uppercase anim-fade-up">Gallery</span>
+       <h1 class="anim-fade-up-d1 font-display text-4xl sm:text-5xl font-bold text-black mt-3">Our <span class="text-brown italic">Moments</span></h1>
+      </div>
+     </section><!-- Filter -->
+     <section class="bg-beige pb-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-2 flex-wrap">
+       <button onclick="filterGallery('all')" id="gal-all" class="px-5 py-2 bg-brown text-white text-sm font-medium rounded-full transition-all">All</button> <button onclick="filterGallery('puppies')" id="gal-puppies" class="px-5 py-2 bg-brown/10 text-brown text-sm font-medium rounded-full transition-all hover:bg-brown/20">Puppies</button> <button onclick="filterGallery('adults')" id="gal-adults" class="px-5 py-2 bg-brown/10 text-brown text-sm font-medium rounded-full transition-all hover:bg-brown/20">Adults</button> <button onclick="filterGallery('family')" id="gal-family" class="px-5 py-2 bg-brown/10 text-brown text-sm font-medium rounded-full transition-all hover:bg-brown/20">Family</button>
+      </div>
+     </section>
+     <section class="bg-cream py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <!-- Gallery items generated by JS -->
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== CONTACT PAGE ==================== -->
+    <div id="page-contact" class="page-content hidden">
+     <section class="bg-beige pt-28 sm:pt-36 pb-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <span class="text-brown font-semibold text-sm tracking-widest uppercase anim-fade-up">Entre em Contato</span>
+       <h1 class="anim-fade-up-d1 font-display text-4xl sm:text-5xl font-bold text-black mt-3">Fale <span class="text-brown italic">Conosco</span></h1>
+      </div>
+     </section>
+     <section class="bg-cream py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="grid lg:grid-cols-5 gap-10">
+        <!-- Form -->
+        <div class="lg:col-span-3">
+         <form id="contact-form" onsubmit="handleContactSubmit(event)" class="bg-white rounded-3xl p-6 sm:p-10 border border-beige-dark/15">
+          <h2 class="font-display text-2xl font-bold text-black mb-6">Envie uma Mensagem</h2>
+          <div class="space-y-5">
+           <div>
+            <label for="contact-name" class="block text-sm font-medium text-black/70 mb-1.5">Seu Nome</label> <input type="text" id="contact-name" required placeholder="João Silva" class="w-full px-4 py-3 rounded-xl border border-beige-dark/30 bg-beige-light/30 text-black placeholder-black/30 transition-all">
+           </div>
+           <div>
+            <label for="contact-email" class="block text-sm font-medium text-black/70 mb-1.5">Email</label> <input type="email" id="contact-email" required placeholder="joao@exemplo.com" class="w-full px-4 py-3 rounded-xl border border-beige-dark/30 bg-beige-light/30 text-black placeholder-black/30 transition-all">
+           </div>
+           <div>
+            <label for="contact-message" class="block text-sm font-medium text-black/70 mb-1.5">Mensagem</label> <textarea id="contact-message" required rows="5" placeholder="Conte-nos sobre você e o que está procurando..." class="w-full px-4 py-3 rounded-xl border border-beige-dark/30 bg-beige-light/30 text-black placeholder-black/30 transition-all resize-none"></textarea>
+           </div><button type="submit" id="contact-submit" class="w-full py-4 bg-brown text-white font-semibold rounded-xl hover:bg-brown-dark transition-all shadow-md hover:shadow-lg"> Enviar Mensagem </button>
+           <div id="contact-success" class="hidden text-center py-4 bg-green-50 rounded-xl border border-green-200">
+            <p class="text-green-700 font-semibold">✓ Mensagem enviada com sucesso!</p>
+            <p class="text-green-600 text-sm mt-1">Entraremos em contato em breve.</p>
+           </div>
+          </div>
+         </form>
+        </div><!-- Contact Info -->
+        <div class="lg:col-span-2 space-y-6">
+         <div class="bg-brown rounded-3xl p-8 text-white">
+          <h3 class="font-display text-xl font-bold mb-6">Reach Us Directly</h3>
+          <div class="space-y-5">
+           <a href="#" class="flex items-center gap-4 group" onclick="return false;">
+            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all">
+             <i data-lucide="message-circle" class="w-5 h-5"></i>
+            </div>
+            <div>
+             <p class="text-xs text-white/60 uppercase tracking-wider">WhatsApp</p>
+             <p id="display-whatsapp" class="font-semibold">+1 (555) 123-4567</p>
+            </div></a> <a href="#" class="flex items-center gap-4 group" onclick="return false;">
+            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all">
+             <i data-lucide="instagram" class="w-5 h-5"></i>
+            </div>
+            <div>
+             <p class="text-xs text-white/60 uppercase tracking-wider">Instagram</p>
+             <p id="display-instagram" class="font-semibold">@goldenpawslabs</p>
+            </div></a> <a href="#" class="flex items-center gap-4 group" onclick="return false;">
+            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all">
+             <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <div>
+             <p class="text-xs text-white/60 uppercase tracking-wider">Email</p>
+             <p id="display-email" class="font-semibold">hello@goldenpawslabs.com</p>
+            </div></a>
+          </div>
+         </div>
+         <div class="bg-beige rounded-2xl p-6 text-center">
+          <p class="text-black/50 text-sm">Prefer a quick chat?</p><button onclick="return false;" class="mt-3 inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-all text-sm"> <i data-lucide="message-circle" class="w-4 h-4"></i> Open WhatsApp </button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main><!-- ============ DOG MODAL ============ -->
+   <div id="dog-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="modal-overlay absolute inset-0" onclick="closeDogModal()"></div>
+    <div class="relative z-10 flex items-center justify-center min-h-full p-4">
+     <div class="bg-cream rounded-3xl max-w-2xl w-full max-h-[85%] overflow-auto anim-scale-in shadow-2xl">
+      <div class="sticky top-0 bg-cream/95 backdrop-blur px-6 py-4 flex items-center justify-between border-b border-beige-dark/15 rounded-t-3xl z-10">
+       <h3 id="modal-dog-name" class="font-display text-xl font-bold text-black">Dog Name</h3><button onclick="closeDogModal()" class="w-10 h-10 rounded-full bg-beige hover:bg-beige-dark/30 flex items-center justify-center transition-all" aria-label="Close modal"> <i data-lucide="x" class="w-5 h-5 text-black/60"></i> </button>
+      </div><!-- Modal image carousel -->
+      <div class="relative overflow-hidden">
+       <div id="modal-carousel" class="carousel-track">
+        <div class="carousel-slide">
+         <div id="modal-img-1" class="img-placeholder aspect-[16/10] flex items-center justify-center">
+          <svg class="w-32 h-32 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+          </svg>
+         </div>
+        </div>
+        <div class="carousel-slide">
+         <div id="modal-img-2" class="img-placeholder aspect-[16/10] flex items-center justify-center" style="background: linear-gradient(135deg, #D4C4A8, #C4B498);">
+          <svg class="w-32 h-32 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+          </svg>
+         </div>
+        </div>
+        <div class="carousel-slide">
+         <div id="modal-img-3" class="img-placeholder aspect-[16/10] flex items-center justify-center" style="background: linear-gradient(135deg, #C9B897, #B8A580);">
+          <svg class="w-32 h-32 text-brown/15" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+          </svg>
+         </div>
+        </div>
+       </div><button onclick="moveModalCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all" aria-label="Previous image"><i data-lucide="chevron-left" class="w-5 h-5"></i></button> <button onclick="moveModalCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all" aria-label="Next image"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+       <div id="modal-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
+      </div>
+      <div id="modal-content" class="p-6 sm:p-8 space-y-4">
+       <!-- Filled by JS -->
+      </div>
+     </div>
+    </div>
+   </div><!-- ============ LIGHTBOX ============ -->
+   <div id="lightbox" class="lightbox fixed inset-0 z-[100] hidden flex items-center justify-center">
+    <div class="absolute inset-0" onclick="closeLightbox()"></div><button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Close lightbox"> <i data-lucide="x" class="w-6 h-6 text-white"></i> </button>
+    <div id="lightbox-content" class="relative z-10 max-w-3xl w-full mx-4 img-placeholder aspect-[4/3] rounded-2xl flex items-center justify-center">
+     <svg class="w-32 h-32 text-brown/20" viewbox="0 0 80 80" fill="currentColor"><path d="M40 8c-3 0-5 3-5 7s2 7 5 7 5-3 5-7-2-7-5-7zm-13 6c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zm26 0c-2.5 0-4 2-4 5s1.5 5 4 5 4-2 4-5-1.5-5-4-5zM40 25c-8 0-15 6-15 14 0 6 3 10 7 12 2 1 5 2 8 2s6-1 8-2c4-2 7-6 7-12 0-8-7-14-15-14z" />
+     </svg>
+    </div>
+   </div><!-- ============ FOOTER ============ -->
+   <footer class="bg-black text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+       <div class="flex items-center gap-2 mb-4">
+        <svg class="w-8 h-8 text-brown" viewbox="0 0 40 40" fill="currentColor"><path d="M20 4c-2 0-3.5 2-3.5 4.5S18 13 20 13s3.5-2.5 3.5-4.5S22 4 20 4zm-8 4c-1.8 0-3 1.5-3 3.5s1.5 3.5 3 3.5 3-1.5 3-3.5-1.2-3.5-3-3.5zm16 0c-1.8 0-3 1.5-3 3.5s1.2 3.5 3 3.5 3-1.5 3-3.5-1.2-3.5-3-3.5zM20 15c-5 0-10 4-10 10 0 4 2 7 5 8.5 1.5.8 3 1.5 5 1.5s3.5-.7 5-1.5c3-1.5 5-4.5 5-8.5 0-6-5-10-10-10z" />
+        </svg><span id="footer-kennel-name" class="font-display text-lg font-bold text-white">Golden Paws Labradors</span>
+       </div>
+       <p class="text-white/40 text-sm leading-relaxed">Breeding exceptional Labrador Retrievers with love and dedication since 2009.</p>
+      </div>
+      <div>
+       <h4 class="font-bold text-white mb-4">Quick Links</h4>
+       <div class="space-y-2">
+        <button onclick="navigateTo('home')" class="block text-white/40 hover:text-brown text-sm transition-colors">Home</button> <button onclick="navigateTo('breed')" class="block text-white/40 hover:text-brown text-sm transition-colors">About the Breed</button> <button onclick="navigateTo('dogs')" class="block text-white/40 hover:text-brown text-sm transition-colors">Our Dogs</button> <button onclick="navigateTo('litters')" class="block text-white/40 hover:text-brown text-sm transition-colors">Litters &amp; Puppies</button>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-bold text-white mb-4">Contact</h4>
+       <div class="space-y-2 text-sm text-white/40">
+        <p id="footer-whatsapp">+1 (555) 123-4567</p>
+        <p id="footer-email">hello@goldenpawslabs.com</p>
+        <p id="footer-instagram">@goldenpawslabs</p>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-bold text-white mb-4">Follow Us</h4>
+       <div class="flex gap-3">
+        <span class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brown transition-all cursor-pointer"><i data-lucide="instagram" class="w-5 h-5"></i></span> <span class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brown transition-all cursor-pointer"><i data-lucide="facebook" class="w-5 h-5"></i></span> <span class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brown transition-all cursor-pointer"><i data-lucide="youtube" class="w-5 h-5"></i></span>
+       </div>
+      </div>
+     </div>
+     <div class="mt-12 pt-8 border-t border-white/10 text-center text-xs text-white/30">
+      <p>© 2025 Golden Paws Labradors. All rights reserved.</p>
+     </div>
+    </div>
+   </footer>
+  </div><!-- end app-root -->
+  <script>
+// ========== STATE ==========
+let currentPage = 'home';
+let testimonialIndex = 0;
+let modalCarouselIndex = 0;
+
+// Dog data for modals
+const dogData = {
+  luna: {
+    name: 'Luna', gender: '♀ Dam', age: '4 years', color: 'Yellow',
+    traits: ['Gentle', 'OFA Excellent', 'Champion Line', 'CERF Clear'],
+    description: 'Luna is our pride and joy — a gentle, loving mother with an incredibly calm and nurturing temperament. She comes from an outstanding champion lineage and has been fully health tested with excellent results across all evaluations. Her puppies consistently inherit her beautiful structure, sweet disposition, and that unmistakable Labrador warmth. Luna excels in obedience and has a natural affinity with children, making her offspring ideal family companions.',
+    weight: '28 kg', height: '58 cm', registered: 'AKC #WS12345678'
+  },
+  bella: {
+    name: 'Bella', gender: '♀ Dam', age: '3 years', color: 'Yellow',
+    traits: ['Athletic', 'OFA Good', 'CERF Clear', 'EIC Clear'],
+    description: 'Bella is an energetic and playful dam with a gorgeous coat and an infectious zest for life. She comes from a line of champion field and show dogs, combining athleticism with beauty. Her puppies are known for their drive, intelligence, and loving nature. Bella has been fully health tested and clears all breed-specific genetic conditions.',
+    weight: '27 kg', height: '56 cm', registered: 'AKC #WS98765432'
+  },
+  duke: {
+    name: 'Duke', gender: '♂ Sire', age: '5 years', color: 'Yellow',
+    traits: ['Strong Build', 'OFA Excellent', 'Multi-Champion', 'CNM Clear'],
+    description: 'Duke is a magnificent male with an impressive build, confident movement, and a heart of gold. Multi-champion bloodline, he brings exceptional bone structure and a wonderfully balanced temperament to every litter. Duke\'s puppies are known for their excellent structure and gentle disposition, making them standout companions and potential show prospects.',
+    weight: '34 kg', height: '61 cm', registered: 'AKC #WS55667788'
+  },
+  max: {
+    name: 'Max', gender: '♂ Sire', age: '4 years', color: 'Black',
+    traits: ['Beautiful Coat', 'EIC Clear', 'CNM Clear', 'OFA Good'],
+    description: 'Max is a striking black Labrador with impeccable movement, a dense, glossy coat, and the sweetest personality. He brings exceptional bone structure, a wonderful coat quality, and a calm demeanor to his offspring. Fully health tested and cleared for all breed-specific conditions, Max produces puppies with outstanding temperaments and beautiful conformation.',
+    weight: '33 kg', height: '60 cm', registered: 'AKC #WS11223344'
+  }
+};
+
+// Gallery data
+const galleryItems = [
+  { cat: 'puppies', bg: 'linear-gradient(135deg, #F5E6A3, #D4A85A)', label: '🐶' },
+  { cat: 'adults', bg: 'linear-gradient(135deg, #E8D5B8, #C9B897)', label: '🐕' },
+  { cat: 'family', bg: 'linear-gradient(135deg, #D4C4A8, #B8A580)', label: '👨‍👩‍👧' },
+  { cat: 'puppies', bg: 'linear-gradient(135deg, #F0DFC0, #D4C4A8)', label: '🐶' },
+  { cat: 'adults', bg: 'linear-gradient(135deg, #3D3D3D, #1A1A1A)', label: '🐕‍🦺' },
+  { cat: 'family', bg: 'linear-gradient(135deg, #C9B897, #A89470)', label: '❤️' },
+  { cat: 'puppies', bg: 'linear-gradient(135deg, #E8D5B8, #D4A85A)', label: '🐶' },
+  { cat: 'adults', bg: 'linear-gradient(135deg, #8B6B4A, #5C3D2E)', label: '🐕' },
+  { cat: 'puppies', bg: 'linear-gradient(135deg, #F5E6A3, #C9B897)', label: '🐾' },
+  { cat: 'family', bg: 'linear-gradient(135deg, #D4C4A8, #C4B498)', label: '🏡' },
+  { cat: 'adults', bg: 'linear-gradient(135deg, #E8D5B8, #C9B897)', label: '🐕' },
+  { cat: 'puppies', bg: 'linear-gradient(135deg, #F0DFC0, #E8D5B8)', label: '🐶' },
+];
+
+// ========== NAVIGATION ==========
+function navigateTo(page) {
+  document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+  const el = document.getElementById('page-' + page);
+  if (el) { el.classList.remove('hidden'); }
+  currentPage = page;
+  document.getElementById('app-root').scrollTop = 0;
+
+  // Re-init reveals and icons
+  setTimeout(() => {
+    initRevealObserver();
+    lucide.createIcons();
+  }, 50);
+}
+
+// ========== MOBILE MENU ==========
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+// ========== HEADER SCROLL ==========
+document.getElementById('app-root').addEventListener('scroll', function() {
+  const header = document.getElementById('site-header');
+  if (this.scrollTop > 50) { header.classList.add('scrolled'); }
+  else { header.classList.remove('scrolled'); }
+});
+
+// ========== TESTIMONIAL CAROUSEL ==========
+function moveTestimonial(dir) {
+  testimonialIndex = (testimonialIndex + dir + 3) % 3;
+  updateTestimonial();
+}
+function goToTestimonial(i) {
+  testimonialIndex = i;
+  updateTestimonial();
+}
+function updateTestimonial() {
+  document.getElementById('testimonial-track').style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  document.querySelectorAll('#testimonial-dots button').forEach((d, i) => {
+    d.className = `w-2.5 h-2.5 rounded-full transition-all ${i === testimonialIndex ? 'bg-white w-6' : 'bg-white/30'}`;
+  });
+}
+
+// ========== DOGS TABS ==========
+function switchDogTab(tab) {
+  document.getElementById('dogs-dams').classList.toggle('hidden', tab !== 'dams');
+  document.getElementById('dogs-sires').classList.toggle('hidden', tab !== 'sires');
+  const tabDams = document.getElementById('tab-dams');
+  const tabSires = document.getElementById('tab-sires');
+  if (tab === 'dams') {
+    tabDams.className = 'tab-active px-8 py-3 font-semibold text-brown border-b-2 border-brown transition-all';
+    tabSires.className = 'px-8 py-3 font-semibold text-black/40 border-b-2 border-transparent hover:text-brown transition-all';
+  } else {
+    tabSires.className = 'tab-active px-8 py-3 font-semibold text-brown border-b-2 border-brown transition-all';
+    tabDams.className = 'px-8 py-3 font-semibold text-black/40 border-b-2 border-transparent hover:text-brown transition-all';
+  }
+}
+
+// ========== DOG MODAL ==========
+function openDogModal(dogId) {
+  const dog = dogData[dogId];
+  if (!dog) return;
+  modalCarouselIndex = 0;
+  document.getElementById('modal-dog-name').textContent = dog.name;
+  document.getElementById('modal-carousel').style.transform = 'translateX(0)';
+
+  const content = document.getElementById('modal-content');
+  content.innerHTML = `
+    <div class="flex items-center gap-3 flex-wrap">
+      <span class="px-3 py-1 ${dog.gender.includes('♀') ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700'} text-xs font-bold rounded-full">${dog.gender}</span>
+      <span class="text-sm text-black/50">${dog.age} · ${dog.color}</span>
+    </div>
+    <p class="text-black/65 leading-relaxed">${dog.description}</p>
+    <div class="grid grid-cols-3 gap-3">
+      <div class="bg-beige-light rounded-xl p-3 text-center"><p class="text-xs text-black/40">Weight</p><p class="font-bold text-sm text-black">${dog.weight}</p></div>
+      <div class="bg-beige-light rounded-xl p-3 text-center"><p class="text-xs text-black/40">Height</p><p class="font-bold text-sm text-black">${dog.height}</p></div>
+      <div class="bg-beige-light rounded-xl p-3 text-center"><p class="text-xs text-black/40">Reg.</p><p class="font-bold text-sm text-black text-[10px]">${dog.registered}</p></div>
+    </div>
+    <div class="flex flex-wrap gap-2">${dog.traits.map(t => `<span class="px-3 py-1 bg-brown/10 text-brown text-xs font-medium rounded-full">${t}</span>`).join('')}</div>
+  `;
+
+  // Update modal dots
+  const dots = document.getElementById('modal-dots');
+  dots.innerHTML = [0,1,2].map(i => `<button onclick="goToModalSlide(${i})" class="w-2 h-2 rounded-full ${i===0?'bg-brown':'bg-brown/30'} transition-all" aria-label="Image ${i+1}"></button>`).join('');
+
+  document.getElementById('dog-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  lucide.createIcons();
+}
+function closeDogModal() {
+  document.getElementById('dog-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function moveModalCarousel(dir) {
+  modalCarouselIndex = (modalCarouselIndex + dir + 3) % 3;
+  document.getElementById('modal-carousel').style.transform = `translateX(-${modalCarouselIndex * 100}%)`;
+  document.querySelectorAll('#modal-dots button').forEach((d, i) => {
+    d.className = `w-2 h-2 rounded-full ${i === modalCarouselIndex ? 'bg-brown' : 'bg-brown/30'} transition-all`;
+  });
+}
+function goToModalSlide(i) { modalCarouselIndex = i; moveModalCarousel(0); }
+
+// ========== GALLERY ==========
+function buildGallery(filter) {
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = '';
+  const items = filter === 'all' ? galleryItems : galleryItems.filter(g => g.cat === filter);
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    const aspect = i % 3 === 0 ? 'aspect-[3/4]' : 'aspect-square';
+    div.className = `rounded-2xl cursor-pointer overflow-hidden ${aspect} flex items-center justify-center transition-all hover:scale-[1.02] hover:shadow-lg`;
+    div.style.background = item.bg;
+    div.innerHTML = `<span class="text-5xl opacity-40">${item.label}</span>`;
+    div.onclick = () => openLightbox(item);
+    grid.appendChild(div);
+  });
+}
+function filterGallery(cat) {
+  ['all','puppies','adults','family'].forEach(c => {
+    const btn = document.getElementById('gal-' + c);
+    btn.className = c === cat
+      ? 'px-5 py-2 bg-brown text-white text-sm font-medium rounded-full transition-all'
+      : 'px-5 py-2 bg-brown/10 text-brown text-sm font-medium rounded-full transition-all hover:bg-brown/20';
+  });
+  buildGallery(cat);
+}
+
+// ========== LIGHTBOX ==========
+function openLightbox(item) {
+  const lb = document.getElementById('lightbox');
+  const content = document.getElementById('lightbox-content');
+  content.style.background = item.bg;
+  content.innerHTML = `<span class="text-8xl opacity-30">${item.label}</span>`;
+  lb.classList.remove('hidden');
+  lucide.createIcons();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.add('hidden');
+}
+
+// ========== CONTACT FORM ==========
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('contact-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+    document.getElementById('contact-success').classList.remove('hidden');
+    document.getElementById('contact-form').reset();
+    setTimeout(() => {
+      document.getElementById('contact-success').classList.add('hidden');
+    }, 4000);
+  }, 1500);
+}
+
+// ========== SCROLL REVEAL ==========
+function initRevealObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, root: document.getElementById('app-root') });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+
+// ========== ELEMENT SDK ==========
+const defaultConfig = {
+  kennel_name: 'Golden Paws Labradors',
+  hero_headline: 'Where Love Begins',
+  hero_subheadline: 'Raising exceptional Labrador Retrievers with love, dedication, and a commitment to the highest standards of health and temperament.',
+  about_text: 'For over 15 years, our kennel has been dedicated to breeding Labrador Retrievers of exceptional quality. Every puppy is raised in a family environment with early socialization, health testing, and an abundance of love. We believe that a great dog starts with great breeding and even greater care.',
+  whatsapp_number: '+1 (555) 123-4567',
+  instagram_handle: '@goldenpawslabs',
+  contact_email: 'hello@goldenpawslabs.com',
+  background_color: '#FAF5ED',
+  surface_color: '#FFFDF8',
+  text_color: '#000000',
+  primary_action_color: '#895129',
+  secondary_action_color: '#6E3F1F',
+  font_family: 'DM Sans',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+
+  // Text content
+  document.getElementById('header-kennel-name').textContent = c.kennel_name.replace(' Labradors','').replace(' Labs','');
+  document.getElementById('footer-kennel-name').textContent = c.kennel_name;
+
+  const heroEl = document.getElementById('hero-headline');
+  if (c.hero_headline !== defaultConfig.hero_headline) {
+    heroEl.innerHTML = c.hero_headline;
+  }
+  document.getElementById('hero-subheadline').textContent = c.hero_subheadline;
+  document.getElementById('about-text').textContent = c.about_text;
+  document.getElementById('display-whatsapp').textContent = c.whatsapp_number;
+  document.getElementById('display-instagram').textContent = c.instagram_handle;
+  document.getElementById('display-email').textContent = c.contact_email;
+  document.getElementById('footer-whatsapp').textContent = c.whatsapp_number;
+  document.getElementById('footer-email').textContent = c.contact_email;
+  document.getElementById('footer-instagram').textContent = c.instagram_handle;
+
+  // Colors
+  const root = document.documentElement;
+  root.style.setProperty('--bg', c.background_color);
+  root.style.setProperty('--surface', c.surface_color);
+
+  document.getElementById('app-root').style.backgroundColor = c.background_color;
+
+  // Apply font
+  const font = c.font_family || defaultConfig.font_family;
+  const baseStack = 'Helvetica, Arial, sans-serif';
+  document.body.style.fontFamily = `${font}, ${baseStack}`;
+
+  // Font size
+  const base = c.font_size || defaultConfig.font_size;
+  document.body.style.fontSize = `${base}px`;
+}
+
+if (window.elementSdk) {
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => { applyConfig(config); },
+    mapToCapabilities: (config) => {
+      const c = { ...defaultConfig, ...config };
+      return {
+        recolorables: [
+          { get: () => c.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => c.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => c.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => c.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+          { get: () => c.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } },
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => c.font_family || defaultConfig.font_family,
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: {
+          get: () => c.font_size || defaultConfig.font_size,
+          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+        }
+      };
+    },
+    mapToEditPanelValues: (config) => {
+      const c = { ...defaultConfig, ...config };
+      return new Map([
+        ['kennel_name', c.kennel_name],
+        ['hero_headline', c.hero_headline],
+        ['hero_subheadline', c.hero_subheadline],
+        ['about_text', c.about_text],
+        ['whatsapp_number', c.whatsapp_number],
+        ['instagram_handle', c.instagram_handle],
+        ['contact_email', c.contact_email],
+      ]);
+    }
+  });
+}
+
+// ========== INIT ==========
+applyConfig(defaultConfig);
+buildGallery('all');
+initRevealObserver();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ebb73bd14d6876b',t:'MTc3NjA5MzU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
